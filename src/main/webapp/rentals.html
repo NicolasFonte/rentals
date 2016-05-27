@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Rentals</title>
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/u/dt/jq-2.2.3,dt-1.10.12/datatables.min.css" />
+
+<script type="text/javascript"
+	src="https://cdn.datatables.net/u/dt/jq-2.2.3,dt-1.10.12/datatables.min.js"></script>
+
+<script type="text/javascript" src="js/rentals.js"> </script>
+
+</head>
+<body>
+	<h2>Solr/Mongodb UI testing page.</h2>
+	<div id="filters">
+		<h4>Filtering Data retrieved by Solr. It can be by value, date
+			range or numeric range</h4>
+		<table border="1" style="width: 100%">
+			<tr>
+				<td>
+					<div id="filter-criteria">
+						<form action="rentals.html">
+							<h4>Filter by field value</h4>
+							<p>
+								<label for="city">City:</label> <input id="city" type="text"
+									name="city" placeholder="city">
+							</p>
+							<p>
+								<label for="roomsNumber">Rooms Number:</label> <input
+									id="roomsNumber" type="text" name="roomsNumber" placeholder="4">
+							</p>
+							<input type="button" value="Filter" onClick="performFilter()">
+						</form>
+					</div>
+				</td>
+				<td>
+					<div id="filter-range">
+						<form action="rentals.html">
+							<h4>Filter by date creation/update range</h4>
+							<p>
+								<label for="initialDate">Initial Date:</label> <input
+									id="initialDate" type="text" name="initialDate"
+									placeholder="20020101">
+							</p>
+							<p>
+								<label for="endDate">End Date</label> <input id="endDate"
+									type="text" name="endDate" placeholder="20030101">
+							</p>
+							<input type="button" value="Filter" onClick="performRange()">
+						</form>
+					</div>
+				</td>
+				<td>
+					<div id="filter-numeric-range">
+						<form action="rentals.html">
+							<h4>Filter by date numeric range</h4>
+							<select id="rangeField">
+								<option value="roomsNumber">Rooms Number</option>
+								<option value="dailyPrice">Daily Price</option>
+							</select>
+							<p>
+								<label for="initialRange">Initial Range:</label> <input
+									id="initialRange" type="text" name="initialRange">
+							</p>
+							<p>
+								<label for="endRange">End Range</label> <input id="endRange"
+									type="text" name="endRange">
+							</p>
+							<input type="button" value="Filter"
+								onClick="performNumericRange()">
+						</form>
+					</div>
+				</td>
+			<tr align="center">
+				<td colspan="3">
+					<p>
+						<label for="rows">Limit rows number:</label> <input id="rows"
+							type="text" name="rows" placeholder="50">
+					</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br />
+
+	<div id="add-rental-div">
+		<h4>Add a new Rental</h4>
+		<form action="rest/create/form" method="POST">
+
+			<label for="form-id">Id</label> <input id="form-id" type="text"
+				name="form-id" /> <label for="form-city">City:</label> <input
+				id="form-city" type="text" name="form-city" /> <label
+				for="form-country">Country:</label> <input id="form-country"
+				type="text" name="form-country" /> <label for="form-province">Province:</label>
+			<input id="form-province" type="text" name="form-province" /> <label
+				for="form-roomsNumber">Rooms Number</label> <input
+				id="form-roomsNumber" type="text" name="form-roomsNumber" /> <label
+				for="form-dailyPrice">Daily Price</label> <input
+				id="form-dailyPrice" type="number" name="form-dailyPrice" step="any" />
+
+			<input type="Submit" value="Send" />
+		</form>
+
+	</div>
+
+	<br />
+	<h4>Result data</h4>
+	<table id="rentals" class="display"></table>
+	Note: The search function perform a search inside the datatable. For
+	reloading the dataset with filters use the filters above.
+	<br /> Created by Nicolas Fontenele
+</body>
+
+</html>
